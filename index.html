@@ -1,11 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Сайт с кошками!!!</title>
+    <title>Мой график Plotly</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #graph { width: 800px; height: 500px; margin: 0 auto; }
+    </style>
 </head>
 <body>
-<h3 style='color: red'> Сайт с кошками </h3>
-<img src="https://i.pinimg.com/736x/b3/31/d6/b331d6d35d9de9cd10dc157d72f5c61b.jpg" alt="Cats" />
+<h1>Мой первый график на GitHub Pages</h1>
+<div id="graph"></div>
+
+<script>
+    // Данные для графика
+    const data = [{
+        x: [1, 2, 3, 4, 5],
+        y: [10, 15, 13, 17, 10],
+        type: 'scatter',
+        mode: 'lines+markers',
+        marker: {color: 'blue'}
+    }];
+
+    // Настройки макета
+    const layout = {
+        title: 'Пример графика Plotly',
+        xaxis: {title: 'Ось X'},
+        yaxis: {title: 'Ось Y'}
+    };
+
+    // Создаем график
+    Plotly.newPlot('graph', data, layout);
+</script>
 </body>
 </html>
