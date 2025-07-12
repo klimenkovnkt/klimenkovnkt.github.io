@@ -1,34 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Мой график Plotly</title>
+    <title>Фруктовый график</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        #graph { width: 800px; height: 500px; margin: 0 auto; }
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .slider-container {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+        .slider-container label {
+            width: 100px;
+            display: inline-block;
+        }
+        #graph {
+            width: 100%;
+            height: 500px;
+        }
+        .value-display {
+            width: 50px;
+            display: inline-block;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<h1>Мой первый график на GitHub Pages</h1>
+<h1>Фруктовый график</h1>
+<p>Используйте ползунки, чтобы изменить количество фруктов:</p>
+
+<div class="slider-container">
+    <label for="apples">Яблоки:</label>
+    <input type="range" id="apples" min="0" max="50" value="20" class="slider">
+    <span id="apples-value" class="value-display">20</span>
+</div>
+
+<div class="slider-container">
+    <label for="oranges">Апельсины:</label>
+    <input type="range" id="oranges" min="0" max="50" value="14" class="slider">
+    <span id="oranges-value" class="value-display">14</span>
+</div>
+
+<div class="slider-container">
+    <label for="bananas">Бананы:</label>
+    <input type="range" id="bananas" min="0" max="50" value="23" class="slider">
+    <span id="bananas-value" class="value-display">23</span>
+</div>
+
 <div id="graph"></div>
 
 <script>
-    // Данные для графика
-    const data = [{
-        x: ['Яблоки', 'Апельсины', 'Бананы'],
-        y: [20, 14, 23],
-        type: 'bar'
-    }];
+    // Элементы DOM
+    const applesSlider = document.getElementById('apples');
+    const orangesSlider = document.getElementById('oranges');
+    const bananasSlider = document.getElementById('bananas');
 
-    // Настройки макета
-    const layout = {
-        title: 'Пример графика Plotly',
-        xaxis: {title: 'Ось X'},
-        yaxis: {title: 'Ось Y'}
+    // Начальные данные
+    let fruitData = {
+        apples: 20,
+        oranges: 14,
+        bananas: 23
     };
 
     // Создаем график
-    Plotly.newPlot('graph', data, layout);
+    function createPlot() {
+        const data = [{
+            x: ['Яблоки', 'Апельсины', 'Бананы'],
+            y: [fruitData.apples, fruitData.oranges, fruitData.bananas],
+            type: 'bar',
+            marker: {
+                color: ['#e74c3c', '#f39c12', '#f1c40f']
+            }
+        }];
+
+        const layout = {
+            title: 'Количество фруктов',
+            yaxis: {title: 'Количество', range: [0, 50]}
+        };
+
+        Plotly.newPlot('graph', data, layout);
+    }
+
+    // Обновляем график
+    function updatePlot() {
+        Plotly.restyle('graph', 'y', [[
+            fruitData.apples,
+            fruitData.oranges,
+            fruitData.bananas
+        ]]);
+    }
+
+    // Обработчики событий для ползунков
+    applesSlider.addEventListener('input', function() {
+        fruitData.apples = parseInt(this.value);
+        document.getElementById('apples-value').textContent = this.value;
+        updatePlot();
+    });
+
+    orangesSlider.addEventListener('input', function() {
+        fruitData.oranges = parseInt(this.value);
+        document.getElementById('oranges-value').textContent = this.value;
+        updatePlot();
+    });
+
+    bananasSlider.addEventListener('input', function() {
+        fruitData.bananas = parseInt(this.value);
+        document.getElementById('bananas-value').textContent = this.value;
+        updatePlot();
+    });
+
+    // Инициализация
+    createPlot();
 </script>
 </body>
 </html>
