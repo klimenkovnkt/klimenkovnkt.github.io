@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изучение моды, медианы и среднего</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.0.0/dist/tf.min.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Определите моду, медиану и среднее</h1>
+        
+        <div class="content">
+            <div id="plot-container"></div>
+            
+            <div class="quiz-container">
+                <h2>Соответствие цветов:</h2>
+                <form id="answer-form">
+                    <div class="form-group">
+                        <label>Красная линия:</label>
+                        <select name="red">
+                            <option value="">Выберите...</option>
+                            <option value="mean">Среднее</option>
+                            <option value="median">Медиана</option>
+                            <option value="mode">Мода</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Синяя линия:</label>
+                        <select name="blue">
+                            <option value="">Выберите...</option>
+                            <option value="mean">Среднее</option>
+                            <option value="median">Медиана</option>
+                            <option value="mode">Мода</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Зеленая линия:</label>
+                        <select name="green">
+                            <option value="">Выберите...</option>
+                            <option value="mean">Среднее</option>
+                            <option value="median">Медиана</option>
+                            <option value="mode">Мода</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit">Проверить ответ</button>
+                </form>
+                
+                <div id="result"></div>
+                
+                <button id="refresh-btn" class="refresh-btn">Новое задание</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
